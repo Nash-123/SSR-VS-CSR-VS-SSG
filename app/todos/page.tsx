@@ -1,16 +1,14 @@
 import Image from "next/image";
 // We dont use server side props like last year
-import revalidate from "./lib/actions/action1";
 
 export default async function Home() {
   const response = await fetch("https://sum-server.100xdevs.com/todos",{
     next: {
-      tags: ['todos']
+        revalidate:10
     }
-  })
+  });
   const data = await response?.json();
-  revalidate();
-  console.log("Logs from BE is ");
+  console.log("data found from the BE server is ");
   console.log(JSON.stringify(data));
   return (
     <div>
